@@ -1,0 +1,68 @@
+<body>
+  <div class="row">
+    <h3 class='col-12'><%= @collection.name %></h3>
+  </div>
+
+  <%= link_to "Export as CSV", export_csv_issues_path(format: :csv), class: "btn btn-primary" %>
+
+  <p><%= link_to "Add an Issue", new_collection_issue_path(@collection.id) %></p>
+
+  <table class="table">
+    <thead>
+      <tr class="tr">
+        <th class="th1">Collector's ID</th>
+        <th class="th1">Title</th>
+
+        <% if @issues.where(condition: nil) == [] %>
+          <th class="th1">Condition</th>
+        <% end %>
+
+        <% if @issues.where(date: nil) == [] %>
+          <th class="th1">Date</th>
+        <% end %>
+
+        <% if @issues.where(origin: nil) == [] %>
+          <th class="th1">Origin</th>
+        <% end %>
+
+        <th class="th1">Status</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @issues.each do |issue| %>
+        <tr class="tr">
+          <% if !issue.incomplete? %>
+            <td style="text-align:center"><%= issue.collector_id %></td>
+            <td style="text-align:center"><%= issue.title %></td>
+            <td style="text-align:center"><%= link_to "Update Item", edit_collection_issue_path(@collection, issue) %></td>
+
+            <% if @issues.where(condition: nil) == [] %>
+              <td style="text-align:center"><%= issue.condition %></td>
+            <% end %>
+
+            <% if @issues.where(date: nil) == [] %>
+            <td style="text-align:center"><%= issue.date %></td>
+            <% end %>
+
+            <% if @issues.where(origin: nil) == [] %>
+            <td style="text-align:center"><%= issue.origin %></td>
+            <% end %>
+
+            <% if @issues.where(price: nil) == [] %>
+            <td style="text-align:center"><%= issue.price %></td>
+            <% end %>
+
+            <% if issue.status == "do_not_have" %>
+              <td style="text-align:center"><%= link_to "Find this item", issue.ebay_search %></td>
+            <% elsif issue.status == "have" %>
+              <td style="text-align:center">owned</td>
+            <% elsif issue.status == "ordered" %>
+              <td style="text-align:center">ordered</td>
+            <% end %>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</body>

@@ -20,6 +20,16 @@ class IssuesController < ApplicationController
     end
   end
 
+  def export_csv
+    @issues = Issue.all
+
+    respond_to do |format|
+      format.csv { send_data @issues.to_csv, filename: "issues_#{Date.today}.csv" }
+    end
+
+    # redirect_to collection_issues_path(@collection)
+  end
+
   private
 
   def issue_params

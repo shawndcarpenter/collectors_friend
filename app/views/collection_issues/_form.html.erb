@@ -1,0 +1,17 @@
+  <%= form_with model: @issue, method: method, url: url, class: 'issue_form', data: {turbo: false} do |f| %>  
+    <%= f.label :collector_id, 'ID: (serial number, issue number, etc):' %><br>
+    <%=  f.text_field :collector_id %><br>
+    <%= f.label :title, 'Title/Name of Item:' %><br>
+    <%=  f.text_field :title %><br>
+    <%= f.label :date, 'Date produced:' %><br>
+    <%=  f.text_field :date %><br>
+    <%= f.label :price, 'Price at Purchase:' %><br>
+    <%=  f.text_field :price %><br>
+    <%= f.label :status, 'Ordered, Owned, Not Owned:' %><br>
+    <%=  f.text_field :status %><br>
+    <%= f.label :origin, 'Where this item was purchased:' %><br>
+    <%=  f.text_field :origin %><br>
+    <%= f.label :condition, 'Condition:' %><br>
+    <%=  f.text_field :condition %><br>
+    <%= f.submit %>
+  <% end %>

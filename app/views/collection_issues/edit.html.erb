@@ -1,0 +1,3 @@
+<h1>Update <%= @issue.id %></h1>
+
+  <%= render partial: 'form', locals: { method: :patch, url: collection_issue_path(@collection, @issue), class: 'issue_form'} %>
